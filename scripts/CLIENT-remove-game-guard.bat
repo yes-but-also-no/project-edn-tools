@@ -1,6 +1,7 @@
 @echo off
 
 set dd=%~dp0\..\dd\dd.exe
+set patch=%~dp0\patch.bin
 
 rem "print header"
 echo Welcome to ProjectEDN!
@@ -43,8 +44,21 @@ echo Backup complete!
 echo.
 echo.
 
-rem "decrypt files"
+rem "patch file"
 echo Patching exe...
+
+%dd% if=%patch% of=%1 bs=1 seek=74485 count=6 conv=notrunc
+
+echo Patch complete!
+
+echo.
+echo.
+
+echo Script has completed successfully! The output files if %1.
+echo Please be sure to test the completed patch!
+
+echo.
+echo.
 
 rem "end of script"
 pause
