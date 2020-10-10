@@ -95,6 +95,12 @@ echo Decryption complete!
 echo.
 echo.
 
+echo Script has completed successfully! The output files have been placed in %game%.
+echo Feel free to modify them as you see with and run CLIENT-encrypt-all-files.bat to re-encrypt them!
+
+echo.
+echo.
+
 rem "end of script"
 pause
 exit
