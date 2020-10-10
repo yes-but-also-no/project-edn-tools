@@ -1,7 +1,13 @@
 @echo off
+setlocal enabledelayedexpansion
 
 set game=%~dp0GameDecrypted
 set dec=%~dp0\..\l2encdec\l2encdec.exe
+
+rem "build exclusion list"
+for /f "usebackq tokens=*" %%D in (%~dp0\excluded-files.txt) do (
+    set exclusions=!exclusions! "%%D"
+)
 
 rem "print header"
 echo Welcome to ProjectEDN!
@@ -56,10 +62,7 @@ mkdir %game%
 
 echo Copying files...
 
-xcopy /s /h /c /exclude:%~dp0\excluded-files.txt %1\*.poo %game%
-xcopy /s /h /c /exclude:%~dp0\excluded-files.txt %1\*.ini %game%
-xcopy /s /h /c /exclude:%~dp0\excluded-files.txt %1\*.rc %game%
-xcopy /s /h /c /exclude:%~dp0\excluded-files.txt %1\*.jof %game%
+robocopy %1\ %game% *.poo *.ini *.jof *.rc /s /xf !exclusions!
 
 echo Copy complete!
 
