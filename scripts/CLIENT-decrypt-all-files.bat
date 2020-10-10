@@ -69,6 +69,32 @@ echo Copy complete!
 echo.
 echo.
 
+rem "decrypt files"
+echo Decrypting files...
+
+
+for /R %game%\ %%x in (*.poo, *.ini, *.jof, *.rc) do %dec% -l -t %%x %%xdec && (
+    echo %%x decrypted successfully!
+    del %%x
+    ren %%xdec *%%~xx
+) || (
+    echo %%x failed. Trying again with -d ...
+    %dec% -d -t %%x %%xdec && (
+        echo %%x decrypted successfully!
+        del %%x
+        ren %%xdec *%%~xx
+    ) || (
+        echo Unable to decrypt %%x with -d or -l! Verify you are not trying decrypt an already decrypted file!
+        pause
+        exit
+    )
+)
+
+echo Decryption complete!
+
+echo.
+echo.
+
 rem "end of script"
 pause
 exit
