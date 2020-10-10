@@ -30,3 +30,6 @@ Temporary Items
 *.poo
 *.csv
 *.map
+*.ini
+*.jof
+*.rc
