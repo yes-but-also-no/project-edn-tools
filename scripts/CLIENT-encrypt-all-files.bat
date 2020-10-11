@@ -14,12 +14,12 @@ echo.
 rem "last chance to pull out"
 echo [CLIENT] Game file encrypter
 echo The purpose of this script is to re-encrypt all files and prepare them for transfering into the client
+echo NOTE: Please ensure you have ran CLIENT-remove-game-guard.bat and CLIENT-resign-files.bat on the directory first, or your hashes may be wrong!
 echo This script will:
 echo   - Create (or error if it already exist) the directory %game%
 echo   - Copy all files from %gamed% into %game%
 echo   - Get the md5 hashes of GF.dll and Exteel.exe from %1
 echo   - Re-encrypt the files
-echo   - Copy all of the files into %1 replacing the old ones
 echo.
 echo You may exit the program now or continue if you would like to perform these actions
 
@@ -82,13 +82,24 @@ echo Updating MD5 hashes in version.ini...
 
 
 for /f "skip=1 tokens=* delims=" %%# in ('certutil -hashfile %1\System\GF.dll MD5') do (
-	if not defined md5 (
-		for %%Z in (%%#) do set md5=!md5!%%Z
+	if not defined gfhash (
+		for %%Z in (%%#) do set gfhash=!gfhash!%%Z
 	)
 )
 
-echo %md5%
-pause
+for /f "skip=1 tokens=* delims=" %%# in ('certutil -hashfile %1\System\Exteel.exe MD5') do (
+	if not defined gamehash (
+		for %%Z in (%%#) do set gamehash=!gamehash!%%Z
+	)
+)
+
+call %~dp0\ini.bat /s MD5 /i GF.dll /v %gfhash% %game%/System/version.ini
+call %~dp0\ini.bat /s MD5 /i Exteel.exe /v %gamehash% %game%/System/version.ini
+
+echo Hashing complete!
+
+echo.
+echo.
 
 rem "decrypt files"
 echo Encrypting files...
@@ -106,6 +117,12 @@ for /R %game%\ %%x in (*.poo, *.ini, *.jof, *.rc) do %dec% -e 414 -t %%x %%xenc 
 )
 
 echo Encryption complete!
+
+echo.
+echo.
+
+echo Script has completed successfully! The output files have been placed in %game%.
+echo Copy them into your install directory to update!
 
 echo.
 echo.
