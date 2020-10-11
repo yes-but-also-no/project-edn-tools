@@ -111,6 +111,6 @@ exit
 rem "fail case"
 :BadInput
     echo %1 does not appear to be game install directory! 
-    echo Make sure the folder you use this script on contains the \Maps and \Mutmap directories!
+    echo Make sure the folder you use this script on contains the \System and \Mutmap directories!
     pause
     exit 
