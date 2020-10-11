@@ -1,5 +1,4 @@
 LauncherID.ini
-Version.ini
 ExteelUS.ini
 ExteelTW.ini
 Running.ini

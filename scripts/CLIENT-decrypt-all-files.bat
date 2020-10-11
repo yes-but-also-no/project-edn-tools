@@ -64,6 +64,9 @@ echo Copying files...
 
 robocopy %1\ %game% *.poo *.ini *.jof *.rc /s /xf !exclusions!
 
+rem "handle version.ini manually"
+del %game%\Version.ini 2>nul
+
 echo Copy complete!
 
 echo.
