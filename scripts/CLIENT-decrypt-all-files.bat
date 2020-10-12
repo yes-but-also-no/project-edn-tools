@@ -69,8 +69,6 @@ del %game%\Version.ini 2>nul
 
 echo Copy complete!
 
-pause
-
 echo.
 echo.
 
