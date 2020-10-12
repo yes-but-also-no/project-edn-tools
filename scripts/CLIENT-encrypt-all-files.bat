@@ -70,7 +70,7 @@ mkdir %game%
 
 echo Copying files...
 
-robocopy %gamed%\ %game% *.poo *.ini *.jof *.rc /s
+robocopy %gamed%\ %game% *.poo *.ini *.jof *.rc *.ukx *.ASE *.map *.unr *.uax *.usx *.u *.utx /s
 
 echo Copy complete!
 
@@ -104,8 +104,20 @@ echo.
 rem "decrypt files"
 echo Encrypting files...
 
-
+rem "414 Exteel files"
 for /R %game%\ %%x in (*.poo, *.ini, *.jof, *.rc) do %dec% -e 414 -t %%x %%xenc && (
+    echo %%x encrypted successfully!
+    del %%x
+    ren %%xenc *%%~xx
+) || (
+
+    echo Unable to encrypt %%x. Verify you are not trying encrypt an already encrypted file!
+    pause
+    exit
+)
+
+rem "111 Unreal files"
+for /R %game%\ %%x in (*.ukx, *.ASE, *.map, *.unr, *.uax, *.usx, *.u, *.utx) do %dec% -e 111 %%x %%xenc && (
     echo %%x encrypted successfully!
     del %%x
     ren %%xenc *%%~xx
