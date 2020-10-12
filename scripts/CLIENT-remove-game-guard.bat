@@ -50,9 +50,21 @@ echo Patching exe encryption key...
 
 cd %~dp1
 
+mkdir temp
+
+move Exteel.exe temp
+
+cd temp
+
 %patcher% -n -x Exteel.exe -t 
 
-rd /q /s backup 2>nul
+pause
+
+move Exteel.exe ../
+
+cd ../
+
+rd /q /s temp 2>nul
 
 cd %~dp0
 

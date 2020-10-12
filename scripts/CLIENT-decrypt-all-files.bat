@@ -62,7 +62,7 @@ mkdir %game%
 
 echo Copying files...
 
-robocopy %1\ %game% *.poo *.ini *.jof *.rc *.ukx *.ASE *.map *.unr *.uax *.usx *.u *.utx /s /xf !exclusions!
+robocopy %1\ %game% *.poo *.ini *.jof *.rc *.ukx *.ASE *.map *.unr *.uax *.usx *.u *.utx *.int /s /xf !exclusions!
 
 rem "handle version.ini manually"
 del %game%\Version.ini 2>nul
@@ -76,7 +76,7 @@ rem "decrypt files"
 echo Decrypting files...
 
 rem "414 Exteel files"
-for /R %game%\ %%x in (*.poo, *.ini, *.jof, *.rc) do %dec% -l -t %%x %%xdec && (
+for /R %game%\ %%x in (*.poo, *.ini, *.jof, *.rc, *.int) do %dec% -l -t %%x %%xdec && (
     echo %%x decrypted successfully!
     del %%x
     ren %%xdec *%%~xx
