@@ -1,6 +1,7 @@
 @echo off
 
 set dd=%~dp0\..\dd\dd.exe
+set patcher=%~dp0\..\l2encdec\patcher.exe
 set patch=%~dp0\patch.bin
 
 rem "print header"
@@ -44,8 +45,24 @@ echo Backup complete!
 echo.
 echo.
 
+rem "patch key"
+echo Patching exe encryption key...
+
+cd %~dp1
+
+%patcher% -n -x Exteel.exe -t 
+
+rd /q /s backup 2>nul
+
+cd %~dp0
+
+echo Patch complete!
+
+echo.
+echo.
+
 rem "patch file"
-echo Patching exe...
+echo Patching exe gameguard...
 
 %dd% if=%patch% of=%1 bs=1 seek=74485 count=6 conv=notrunc
 
