@@ -66,11 +66,11 @@ rem "decrypt poo files"
 echo Decrypting poo files...
 
 
-for /R %config%\Poo %%x in (*.poo) do %dec% -l -t %%x %%xcsv && (
+for /R %config%\Poo %%x in (*.poo) do %dec% -l -t %%x %config%\Poo\%%~nx.csv && (
     echo %%x decrypted successfully!
 ) || (
     echo %%x failed. Trying again with -d ...
-    %dec% -d -t %%x %%xcsv && (
+    %dec% -d -t %%x %config%\Poo\%%~nx.csv && (
         echo %%x decrypted successfully!
     ) || (
         echo Unable to decrypt %%x with -d or -l! Verify you are not trying decrypt an already decrypted file!
@@ -88,7 +88,6 @@ rem "rename files and remove originals"
 echo Cleaning up...
 
 for /R %config%\Poo %%x in (*.poo) do del %%x
-for /R %config%\Poo %%x in (*.poocsv) do ren %%x *.csv
 
 echo Cleanup complete!
 
