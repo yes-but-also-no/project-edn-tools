@@ -2,6 +2,13 @@
 
 These are the tools I have used most frequently to work with the game client.
 
+### project state
+
+This code is provided as-is, with no warranty. It is not being actively maintained. If you have any questions, please
+reach out to me and I will do my best to answer them if I have time.
+
+If you are interested in maintaining this project, please let me know.
+
 ## l2encdec
 
 The most important tool. This lets us decrypt and re-encrypt the exteel files.
@@ -54,3 +61,16 @@ If you are only interested in running a server, this process is much simpler. Ju
 - CLIENT-decrypt-all-files.bat: This script will decrypt all files from the game client and save them as copies in a new directory. This works on both the original, unmodified game, as well as a re-encrypted client
 
 - CLIENT-encrypt-all-files.bat: This script will re-encrypt a set of decrypted files using the default l2encdec key. It will also re-hash GF.dll and Exteel.exe and update their hashes in the version.ini file.
+
+## legal
+Every effort has been made to comply with all laws and regulations. This project is an original creation, 
+distributed free of charge. 
+
+It contains no copyrighted files or code. It does not function without the game files, which are NOT included. 
+In order for it to function, the user must legally acquire these files.
+
+Donations are not accepted. 
+
+The sole intent of this project is to provide players a chance to enjoy a long dead game from their childhood. 
+
+If there are any legal concerns, please reach out to me on github and I will be happy to comply in any way required.
